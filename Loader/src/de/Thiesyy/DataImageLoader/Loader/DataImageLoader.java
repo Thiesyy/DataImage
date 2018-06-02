@@ -18,8 +18,9 @@ public static byte[] getBytesFromPicture(String file) throws IOException {
 	File f = new File(file);
 	BufferedImage img = ImageIO.read(f);
 	String a = "";
+	for(int y = 0; y != img.getHeight(); y++) {
 	for(int x = 0; x != img.getWidth(); x++) {
-		 int clr=  img.getRGB(x,0); 
+		 int clr=  img.getRGB(x,y); 
 		  int  red   = (clr & 0x00ff0000) >> 16;
 		  int  green = (clr & 0x0000ff00) >> 8;
 		  int  blue  =  clr & 0x000000ff;
@@ -28,13 +29,17 @@ public static byte[] getBytesFromPicture(String file) throws IOException {
 	//	if(c.getRed() == red && c.getBlue() == blue && c.getGreen() == green) {
 		if(c.equals(c2)) {
 		a +="1";
+		//System.out.print(1);
 		}
 		else {
 			a +="0";
+		//	System.out.print(0);
 		}
 		
 	}
+	}
 	byte[] toRet = new byte[a.length()/8];
+	System.out.println("byte["+toRet.length+"]");
 	for(int y = 0; y != a.length()/8; y++) 
 		toRet[y] = (byte) Integer.parseInt(a.substring(y*8, y*8+8), 2);
 	

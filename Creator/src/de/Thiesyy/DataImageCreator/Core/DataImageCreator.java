@@ -5,20 +5,23 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.BitSet;
-import java.util.Random;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 
 public class DataImageCreator {
-public static void main(String[] args) {
-CreateImage("Test.png", "Cyka Blyat".getBytes());
+public static void main(String[] args) throws IOException {
+CreateImage("Test.png", "Blyatttaa".getBytes());
 }
 public static void CreateImage(String file, byte[] bs) {
 File f = new File(file);
-BufferedImage img = new BufferedImage(bs.length*8, 1, BufferedImage.TYPE_INT_ARGB);
-Graphics2D g = img.createGraphics();
 
+//System.out.println(bs.length);
+BufferedImage img = new BufferedImage(8, bs.length, BufferedImage.TYPE_INT_ARGB);
+Graphics2D g = img.createGraphics();
+int y = 0;
 int x = 0;
 for(byte byt : bs) {
 	
@@ -29,13 +32,19 @@ for(byte byt : bs) {
 	    char c = s1.charAt(i);        
 	  if(c == '1') {
 		  g.setColor(Color.BLACK);
-		  g.fillRect(x, 0, 1, 1);
+		  g.fillRect(x, y, 1, 1);
 	  }else {
 		  g.setColor(Color.WHITE);
-		  g.fillRect(x, 0, 1, 1);
+		  g.fillRect(x, y, 1, 1);
 	  }
-	  System.out.print(c);
-	  x++;  
+	//  System.out.print(c);
+	  x++;
+	  if(x == 8) {
+		  x = 0;
+		  y++;
+	  }
+	//  if(y > bs.length*8)
+	//	  throw new StackOverflowError();
 	}
 	
 	
