@@ -24,8 +24,10 @@ public static byte[] getBytesFromPicture(String file) throws IOException {
 		  int  green = (clr & 0x0000ff00) >> 8;
 		  int  blue  =  clr & 0x000000ff;
 		Color c = Color.black;
-		if(c.getRed() == red && c.getBlue() == blue && c.getGreen() == green) {
-			a +="1";
+		Color c2 = new Color(red,green,blue);
+	//	if(c.getRed() == red && c.getBlue() == blue && c.getGreen() == green) {
+		if(c.equals(c2)) {
+		a +="1";
 		}
 		else {
 			a +="0";
@@ -33,9 +35,9 @@ public static byte[] getBytesFromPicture(String file) throws IOException {
 		
 	}
 	byte[] toRet = new byte[a.length()/8];
-	for(int y = 0; y != a.length()/8; y++) {
+	for(int y = 0; y != a.length()/8; y++) 
 		toRet[y] = (byte) Integer.parseInt(a.substring(y*8, y*8+8), 2);
-	}
+	
 	return toRet;
 }
 

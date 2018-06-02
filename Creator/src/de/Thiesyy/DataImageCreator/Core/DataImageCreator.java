@@ -6,12 +6,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.BitSet;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
 public class DataImageCreator {
 public static void main(String[] args) {
-CreateImage("Test.png", "This is a Test String!".getBytes());
+CreateImage("Test.png", "Cyka Blyat".getBytes());
 }
 public static void CreateImage(String file, byte[] bs) {
 File f = new File(file);
@@ -33,6 +34,7 @@ for(byte byt : bs) {
 		  g.setColor(Color.WHITE);
 		  g.fillRect(x, 0, 1, 1);
 	  }
+	  System.out.print(c);
 	  x++;  
 	}
 	
@@ -48,14 +50,5 @@ try {
 }
 
 }
-public static BitSet fromByte(byte b)
-{
-    BitSet bits = new BitSet(8);
-    for (int i = 0; i < 8; i++)
-    {
-        bits.set(i, (b & 1) == 1);
-        b >>= 1;
-    }
-    return bits;
-}
+
 }
